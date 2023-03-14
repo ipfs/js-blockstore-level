@@ -146,10 +146,7 @@
   "dependencies": {
     "blockstore-core": "^4.0.0",
     "interface-blockstore": "^5.0.0",
-    "it-filter": "^2.0.0",
-    "it-map": "^2.0.0",
-    "it-sort": "^2.0.0",
-    "it-take": "^2.0.0",
+    "interface-store": "^4.0.0",
     "level": "^8.0.0",
     "multiformats": "^11.0.2"
   },

@@ -23,7 +23,7 @@ export interface LevelBlockstoreInit extends DatabaseOptions<string, Uint8Array>
 export class LevelBlockstore extends BaseBlockstore {
   public db: Level<string, Uint8Array>
   private readonly opts: OpenOptions
-  private base: MultibaseCodec<string>
+  private readonly base: MultibaseCodec<string>
 
   constructor (path: string | Level<string, Uint8Array>, init: LevelBlockstoreInit = {}) {
     super()
