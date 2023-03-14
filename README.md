@@ -11,6 +11,7 @@
 
 - [Install](#install)
   - [Browser `<script>` tag](#browser-script-tag)
+- [API Docs](#api-docs)
 - [License](#license)
 - [Contribute](#contribute)
 
@@ -27,6 +28,10 @@ Loading this module through a script tag will make it's exports available as `Bl
 ```html
 <script src="https://unpkg.com/blockstore-level/dist/index.min.js"></script>
 ```
+
+## API Docs
+
+- <https://ipfs.github.io/js-blockstore-level>
 
 ## License
 
