@@ -1,4 +1,4 @@
-import type { Options, Pair } from 'interface-blockstore'
+import type { Pair } from 'interface-blockstore'
 import { BaseBlockstore, Errors } from 'blockstore-core'
 import { Level } from 'level'
 import { CID } from 'multiformats/cid'
@@ -7,7 +7,7 @@ import type { MultibaseCodec } from 'multiformats/bases/interface'
 import { base32upper } from 'multiformats/bases/base32'
 import * as raw from 'multiformats/codecs/raw'
 import * as Digest from 'multiformats/hashes/digest'
-import type { AwaitIterable } from 'interface-store'
+import type { AbortOptions, AwaitIterable } from 'interface-store'
 
 export interface LevelBlockstoreInit extends DatabaseOptions<string, Uint8Array>, OpenOptions {
   /**
@@ -61,9 +61,11 @@ export class LevelBlockstore extends BaseBlockstore {
     }
   }
 
-  async put (key: CID, value: Uint8Array): Promise<void> {
+  async put (key: CID, value: Uint8Array): Promise<CID> {
     try {
       await this.db.put(this.#encode(key), value)
+
+      return key
     } catch (err: any) {
       throw Errors.putFailedError(err)
     }
@@ -108,7 +110,7 @@ export class LevelBlockstore extends BaseBlockstore {
     await this.db.close()
   }
 
-  async * getAll (options?: Options | undefined): AwaitIterable<Pair> {
+  async * getAll (options?: AbortOptions | undefined): AwaitIterable<Pair> {
     for await (const { key, value } of this.#query({ values: true })) {
       yield { cid: this.#decode(key), block: value }
     }
